@@ -1,0 +1,1 @@
+הוספנו ל, בשביל לקבל את הסמלchar getSymbol();piece symble
