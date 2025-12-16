@@ -8,5 +8,5 @@ class Rook : public Piece
 	public:
 		Rook();
 		~Rook();
-		std::vector<std::string> getPossibleMoves() override;
+		std::vector<std::string> getPossibleMoves() const override;
 };

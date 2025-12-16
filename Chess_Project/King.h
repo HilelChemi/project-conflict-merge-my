@@ -8,5 +8,5 @@ class King : public Piece
 	public:
 		King();
 		~King();
-		std::vector<std::string> getPossibleMoves() override;
+		std::vector<std::string> getPossibleMoves() const override;
 };
