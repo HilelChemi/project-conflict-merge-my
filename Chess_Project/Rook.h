@@ -6,7 +6,7 @@
 class Rook : public Piece
 {
 	public:
-		Rook();
+		Rook(bool isWhite, int coords[], char symbol);
 		~Rook();
 		std::vector<std::string> getPossibleMoves() const override;
 };
