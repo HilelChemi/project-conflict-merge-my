@@ -11,7 +11,7 @@ public:
 	~Piece();
 	std::vector<int> getCoords(std::string posion);
 	virtual std::vector<std::string> getPossibleMoves();
-	bool canMove();
+	bool canMoveTo(std::string newPosition);
 	virtual void changeFirstTurn();
 	bool isKingAttaked();
 	std::string getCurrentPosition();
