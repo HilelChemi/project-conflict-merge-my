@@ -1,1 +1,4 @@
 הוספנו ל, בשביל לקבל את הסמל והוספה לפעולה הבונהchar getSymbol();piece symble
+הוספה של פונקצייה getPiece(str) לboard
+setPiece(Piece,str) הוספה לboard
+ לboard getBoard():arr-Pieceהוספה

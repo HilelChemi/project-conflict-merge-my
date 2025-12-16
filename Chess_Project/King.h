@@ -6,7 +6,7 @@
 class King : public Piece
 {
 	public:
-		King();
+		King(bool isWhite, int coords[], char symbol);
 		~King();
 		std::vector<std::string> getPossibleMoves() const override;
 };
