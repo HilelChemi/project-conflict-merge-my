@@ -10,7 +10,7 @@ public:
 	Piece(bool isWhite,int courds[]);
 	~Piece();
 	std::vector<int> getCoords(std::string posion);
-	virtual std::vector<std::string> getPosiibleMoves();
+	virtual std::vector<std::string> getPossibleMoves();
 	bool canMove();
 	virtual void changeFirstTurn();
 	bool isKingAttaked();
