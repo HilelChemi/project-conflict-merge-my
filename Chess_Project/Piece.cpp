@@ -28,44 +28,37 @@ std::vector<std::string> Piece::getPossibleMoves() const//need to be override
 
 bool Piece::canMoveTo(const std::string& newPosition,  Board& board) //check if can move to new position
 {
-	std::vector<std::string> moves = getPossibleMoves();
 	std::string currentPosition = getCurrentPosition();
 	int i = 0;
 	if (newPosition[0] < 'a' || newPosition[0]>'h' || newPosition[1] < '1' || newPosition[1]>'8')
 	{
 		return false;
 	}
-
-	for(i = 0; i < moves.size(); i++)
+	if (board.getPiece(newPosition) != nullptr)
 	{
-		if (moves[i] == newPosition)
+		if (board.getPiece(newPosition)->_isWhite == _isWhite)
 		{
-			if (board.getPiece(newPosition) != nullptr)
-			{
-				if (board.getPiece(newPosition)->_isWhite == _isWhite)
-				{
-					continue;
-				}
-			}
-			Piece* savePiece = board.getPiece(newPosition);
-			int oldX = _coords[0];
-			int oldY = _coords[1];
-			board.changeBoard(currentPosition, newPosition);
-			_coords[0] = newPosition[0] - 'a';
-			_coords[1] = newPosition[1] - '1';
-			if (isKingAttacked(board) == false)
-			{
-				board.changeBoard(newPosition, currentPosition);
-				board.setPiece(savePiece, newPosition);
-				return true;
-			}
-			board.changeBoard(newPosition, currentPosition);
-			_coords[0] = oldX;
-			_coords[1] = oldY;
-			board.setPiece(savePiece, newPosition);
+			return false;
 		}
 	}
-		
+	Piece* savePiece = board.getPiece(newPosition);
+	int oldX = _coords[0];
+	int oldY = _coords[1];
+	board.changeBoard(currentPosition, newPosition);
+	_coords[0] = newPosition[0] - 'a';
+	_coords[1] = newPosition[1] - '1';
+	if (!isKingAttacked(board))
+	{
+		board.changeBoard(newPosition, currentPosition);
+		_coords[0] = oldX;
+		_coords[1] = oldY;
+		board.setPiece(savePiece, newPosition);
+		return true;
+	}
+	board.changeBoard(newPosition, currentPosition);
+	_coords[0] = oldX;
+	_coords[1] = oldY;
+	board.setPiece(savePiece, newPosition);
 	return false;
 }
 void Piece::changeFirstTurn()//only for pawns
