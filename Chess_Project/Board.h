@@ -2,10 +2,11 @@
 #include <vector>
 #include <string>
 #include "Piece.h"
+#define BOARD_SIZE 8
 class Board
 {
 	private:
-		Piece* board[8][8];
+		Piece* board[BOARD_SIZE][BOARD_SIZE];
 	public:
 		Board();
 		~Board();

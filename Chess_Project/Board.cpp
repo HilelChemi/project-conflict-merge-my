@@ -2,9 +2,9 @@
 Board::Board()
 {
 	//add pieces to the board
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < BOARD_SIZE; i++)
 	{
-		for (int j = 0; j < 8; j++)
+		for (int j = 0; j < BOARD_SIZE; j++)
 		{
 			board[i][j] = nullptr;
 		}
@@ -13,9 +13,9 @@ Board::Board()
 Board::~Board()
 {
 	//delete pieces from the board
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < BOARD_SIZE; i++)
 	{
-		for (int j = 0; j < 8; j++)
+		for (int j = 0; j < BOARD_SIZE; j++)
 		{
 			if (board[i][j] != nullptr)
 			{
@@ -27,9 +27,9 @@ Board::~Board()
 std::vector<Piece> Board::getBoard()
 {
 	std::vector<Piece> pieces;
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < BOARD_SIZE; i++)
 	{
-		for (int j = 0; j < 8; j++)
+		for (int j = 0; j < BOARD_SIZE; j++)
 		{
 			if (board[i][j] != nullptr)
 			{
