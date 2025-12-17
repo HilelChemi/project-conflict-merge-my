@@ -5,6 +5,11 @@
 #include "Rook.h"
 #include "King.h"
 #define BOARD_SIZE 8
+#define VISUAL_BECKROUND '.'
+#define WHITE_KING_SYMBOL 'K'
+#define BLACK_KING_SYMBOL 'k'
+#define WHITE_ROOK_SYMBOL 'R'
+#define BLACK_ROOK_SYMBOL 'r'
 class Board
 {
 	private:

@@ -1,7 +1,6 @@
 #include "Board.h"
 #include <iostream>
 
-#define VISUAL_BECKROUND ' '
 
 Board::Board()
 {
@@ -31,11 +30,22 @@ Board::~Board()
 void Board::resetBoard()
 {
 	//reset the board to initial position
-	int pos[2] = { 0, 0 };
-	board[0][0] = new Rook(true, pos,'R');
+	int pos[2] = { 0,0 };
+	setPiece(new Rook(true, pos, WHITE_ROOK_SYMBOL), "a1");
+	pos[X] = 7;
+	setPiece(new Rook(true, pos, WHITE_ROOK_SYMBOL), "h1");
+	pos[X] = 0;
 	pos[Y] = 7;
-	pos[X] = 1;
-	board[1][7] = new King(false, pos, 'K');
+	setPiece(new Rook(false, pos, BLACK_ROOK_SYMBOL), "a8");
+	pos[X] = 7;
+	setPiece(new Rook(false, pos, BLACK_ROOK_SYMBOL), "h8");
+	pos[Y] = 0;
+	pos[X] = 4;
+	setPiece(new King(true, pos, WHITE_KING_SYMBOL), "e1");
+	pos[X] = 4;
+	pos[Y] = 7;
+	setPiece(new King(false, pos, BLACK_KING_SYMBOL), "e8");
+
 }
 std::vector<Piece> Board::getBoard()
 {
@@ -72,6 +82,7 @@ void Board::changeBoard(const std::string& fromPosition, const std::string& toPo
 	int toY = toPosition[1] - '1';
 	board[toX][toY] = board[fromX][fromY];
 	board[fromX][fromY] = nullptr;
+	board[toX][toY]->setCurrentPosition(toPosition);
 }
 void Board::printBoard() const
 {
@@ -86,19 +97,10 @@ void Board::printBoard() const
 			}
 			else
 			{
-				std::cout << VISUAL_BECKROUND;
+				std::cout << VISUAL_BECKROUND<<" ";
 			}
 		}
 		std::cout << std::endl;
 	}
 	std::cout << "  a b c d e f g h" << std::endl;
-}
-
-int main() {
-	Board chessBoard;
-	chessBoard.resetBoard();
-	chessBoard.printBoard();
-	std::cout << chessBoard.getPiece("b8")->isKingAttacked(chessBoard);
-	std::cout << "finish!" << std::endl;
-	return 0;
 }

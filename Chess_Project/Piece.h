@@ -24,7 +24,7 @@ class Piece
 		virtual void changeFirstTurn();//only for pawns
 		bool isKingAttacked( Board& board)const ;//check if king is attacked	(check)
 		std::string getCurrentPosition() const;//get current position
-		void setCurrentPosition(const std::string& newPosition,  Board& board);//set current position
+		void setCurrentPosition(const std::string& newPosition);//set current position
 		char getSymbol() const;//get symbol
 		bool getIsWhite() const;//get is white
 };

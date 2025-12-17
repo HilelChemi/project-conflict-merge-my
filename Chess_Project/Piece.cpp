@@ -38,6 +38,10 @@ void Piece::addMoves(std::vector<std::string>& possibleMoves, const std::string&
 
 bool Piece::canMoveTo(const std::string& newPosition,  Board& board) //check if can move to new position and the king wont be attaked
 {
+	if (board.getPiece(getCurrentPosition()) == nullptr)
+	{
+		return false;//piece not on board
+	}
 	std::string currentPosition = getCurrentPosition();
 	int i = 0;
 	if (newPosition[0] < 'a' || newPosition[0]>'h' || newPosition[1] < '1' || newPosition[1]>'8')
@@ -83,16 +87,33 @@ bool Piece::isKingAttacked( Board& board) const//check if king is attacked	(chec
 	int z = 0;
 	std::vector<std::string> possibleMovesForOponent;
 	Piece* king = nullptr;
+	char kingSymbol ;
+	if (board.getPiece(getCurrentPosition()) == nullptr)
+	{
+		return false;//piece not on board
+	}
+	if(_isWhite)
+	{
+		kingSymbol = 'K';
+	}
+	else
+	{
+		kingSymbol = 'k';
+	}
 	for (i = 0; i < BOARD_SIZE; i++)
 	{
 		for (j = 0; j < BOARD_SIZE; j++)
 		{
 			Piece* piece = board.getPiece(std::string(1, (char)(i + 'a')) + std::string(1, (char)(j + '1')));
-			if(piece != nullptr && piece->_symbol == 'K' && piece->_isWhite == this->_isWhite)
+			if(piece != nullptr && piece->_symbol == kingSymbol)
 			{
 				king = piece;
 				break;
 			}
+		}
+		if(king)
+		{
+			break;
 		}
 	}
 	if(!king)
@@ -104,7 +125,7 @@ bool Piece::isKingAttacked( Board& board) const//check if king is attacked	(chec
 		for (j = 0; j < BOARD_SIZE; j++)
 		{	
 			Piece* piece = board.getPiece(std::string(1, (char)(i + 'a')) + std::string(1, (char)(j + '1')));
-			if (piece != nullptr &&  piece->_isWhite != this->_isWhite)
+			if (piece != nullptr &&  piece->_isWhite != _isWhite)
 			{
 				possibleMovesForOponent = piece->getAttackMoves(board);
 				for (z = 0; z < possibleMovesForOponent.size(); z++)//chaeck if king is attacked
@@ -128,14 +149,10 @@ std::string Piece::getCurrentPosition()  const//get current position
 	return position;
 }
 
-void Piece::setCurrentPosition(const std::string& newPosition,  Board& board) //set current position
+void Piece::setCurrentPosition(const std::string& newPosition) //set current position
 {
-	if(canMoveTo(newPosition, board)==true)
-	{
 		_coords[X] = newPosition[X] - 'a';
 		_coords[Y] = newPosition[Y] - '1';
-	}
-	
 }
 
 char Piece::getSymbol()  const//get symbol
