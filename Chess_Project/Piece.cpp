@@ -1,13 +1,12 @@
 #include "Piece.h"
-
-#define BOARD_SIZE 8
+#include "Board.h"
 
 Piece::Piece(bool isWhite, int coords[], char symbol) //builder
 {
 	_isWhite = isWhite;
 	_symbol = symbol;
-	_coords[0] = coords[0];
-	_coords[1] = coords[1];
+	_coords[X] = coords[X];
+	_coords[Y] = coords[Y];
 }
 Piece::~Piece()//deconstructor
 {
@@ -16,8 +15,8 @@ Piece::~Piece()//deconstructor
 std::vector<int> Piece::getCoords(const std::string& position) const//get coords from position
 {
 	std::vector<int> coords(2);
-	coords[0] =position[0] - 'a';
-	coords[1]= position[1] -  '1';
+	coords[X] =position[X] - 'a';
+	coords[Y]= position[Y] -  '1';
 	return coords;
 }
 
@@ -53,22 +52,22 @@ bool Piece::canMoveTo(const std::string& newPosition,  Board& board) //check if 
 		}
 	}
 	Piece* savePiece = board.getPiece(newPosition);
-	int oldX = _coords[0];
-	int oldY = _coords[1];
+	int oldX = _coords[X];
+	int oldY = _coords[Y];
 	board.changeBoard(currentPosition, newPosition);
-	_coords[0] = newPosition[0] - 'a';
-	_coords[1] = newPosition[1] - '1';
+	_coords[X] = newPosition[X] - 'a';
+	_coords[Y] = newPosition[Y] - '1';
 	if (!isKingAttacked(board))
 	{
 		board.changeBoard(newPosition, currentPosition);
-		_coords[0] = oldX;
-		_coords[1] = oldY;
+		_coords[X] = oldX;
+		_coords[Y] = oldY;
 		board.setPiece(savePiece, newPosition);
 		return true;
 	}
 	board.changeBoard(newPosition, currentPosition);
-	_coords[0] = oldX;
-	_coords[1] = oldY;
+	_coords[X] = oldX;
+	_coords[Y] = oldY;
 	board.setPiece(savePiece, newPosition);
 	return false;
 }
@@ -124,8 +123,8 @@ bool Piece::isKingAttacked( Board& board) const//check if king is attacked	(chec
 std::string Piece::getCurrentPosition()  const//get current position
 {
 	std::string position = "";
-	position += (char)(_coords[0] + 'a');
-	position += (char)(_coords[1] + '1');
+	position += (char)(_coords[X] + 'a');
+	position += (char)(_coords[Y] + '1');
 	return position;
 }
 
@@ -133,8 +132,8 @@ void Piece::setCurrentPosition(const std::string& newPosition,  Board& board) //
 {
 	if(canMoveTo(newPosition, board)==true)
 	{
-		_coords[0] = newPosition[0] - 'a';
-		_coords[1] = newPosition[1] - '1';
+		_coords[X] = newPosition[X] - 'a';
+		_coords[Y] = newPosition[Y] - '1';
 	}
 	
 }

@@ -2,11 +2,14 @@
 #include <Vector>
 #include <string>
 #include "Piece.h"
+#include "Board.h"
 
 class Rook : public Piece
 {
 	public:
 		Rook(bool isWhite, int coords[], char symbol);
 		~Rook();
-		std::vector<std::string> getPossibleMoves() const override;
+		std::vector<std::string> getPossibleMoves(Board& board)  override;
+		std::vector<std::string> getAttackMoves(Board& board) override;
+		void addMoves(std::vector<std::string>& possibleMoves, const std::string& newPos, Board& board) override;
 };

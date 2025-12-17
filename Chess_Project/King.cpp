@@ -24,39 +24,39 @@ std::vector<std::string> King::getAttackMoves(Board& board)
 	std::vector<std::string> possibleMoves;
 	std::string current = getCurrentPosition();
 	std::string newPos = current;
-	newPos[0] = current[0] + 1;//right
+	newPos[X] = current[X] + 1;//right
 	addMoves (possibleMoves,newPos, board);
 	newPos = current;
-	newPos[0] = current[0] - 1;//left
+	newPos[X] = current[X] - 1;//left
 	addMoves(possibleMoves, newPos, board);
 	newPos = current;
-	newPos[1] = current[1] + 1;//up
+	newPos[Y] = current[Y] + 1;//up
 	addMoves(possibleMoves, newPos, board);
 	newPos = current;
-	newPos[1] = current[1] - 1;//down
+	newPos[Y] = current[Y] - 1;//down
 	addMoves(possibleMoves, newPos, board);
 	newPos = current;
-	newPos[0] = current[0] + 1;//up-right
-	newPos[1] = current[1] + 1;
+	newPos[X] = current[X] + 1;//up-right
+	newPos[Y] = current[Y] + 1;
 	addMoves(possibleMoves, newPos, board);
 	newPos = current;
-	newPos[0] = current[0] - 1;//up-left
-	newPos[1] = current[1] + 1;
+	newPos[X] = current[X] - 1;//up-left
+	newPos[Y] = current[Y] + 1;
 	addMoves(possibleMoves, newPos, board);
 	newPos = current;
-	newPos[0] = current[0] + 1;//down-right
-	newPos[1] = current[1] - 1;
+	newPos[X] = current[X] + 1;//down-right
+	newPos[Y] = current[Y] - 1;
 	addMoves(possibleMoves, newPos, board);
 	newPos = current;
-	newPos[0] = current[0] - 1;//down-left
-	newPos[1] = current[1] - 1;
+	newPos[X] = current[X] - 1;//down-left
+	newPos[Y] = current[Y] - 1;
 	addMoves(possibleMoves, newPos, board);
 	return possibleMoves;
 }
 
 void King::addMoves(std::vector<std::string>& possibleMoves,const std::string& newPos, Board& board) 
 {
-	if (newPos[0] <= 'h'&&newPos[0]>='a'&&newPos[1]<='8'&&newPos[1] >= '1')//right
+	if (newPos[X] <= 'h'&&newPos[X]>='a'&&newPos[Y]<='8'&&newPos[Y] >= '1')//right
 	{
 		if (!(board.getPiece(newPos) != nullptr && board.getPiece(newPos)->getIsWhite() == getIsWhite()))
 		{
