@@ -31,10 +31,6 @@ void Player::pickingMove(Board& board)
 		{
 			if (board.getPiece(src))
 			{
-				if (board.getPiece(src)->isKingAttacked(board))
-				{
-					std::cout << "King is attaked" << std::endl;
-				}
 				if(board.getPiece(src)->getIsWhite() == isWhite)
 				{
 					possibleMoves = board.getPiece(src)->getPossibleMoves(board);
