@@ -20,13 +20,24 @@ std::vector<int> Piece::getCoords(const std::string& position) const//get coords
 	coords[1]= position[1] -  '1';
 	return coords;
 }
-std::vector<std::string> Piece::getPossibleMoves() const//need to be override
+
+std::vector<std::string> Piece::getPossibleMoves(Board& board) //need to be override
 {
-	std::vector<std::string> possibleMoves;
-	return possibleMoves;
+	return std::vector<std::string>();
 }
 
-bool Piece::canMoveTo(const std::string& newPosition,  Board& board) //check if can move to new position
+std::vector<std::string> Piece::getAttackMoves(Board& board)
+{
+	return std::vector<std::string>();
+}
+
+void Piece::addMoves(std::vector<std::string>& possibleMoves, const std::string& newPos, Board& board)//adding move to attacked moves
+{
+	//willBeOverited
+ }
+
+
+bool Piece::canMoveTo(const std::string& newPosition,  Board& board) //check if can move to new position and the king wont be attaked
 {
 	std::string currentPosition = getCurrentPosition();
 	int i = 0;
@@ -66,23 +77,40 @@ void Piece::changeFirstTurn()//only for pawns
 	//only for pawns
 }
 
-bool Piece::isKingAttacked(const Board& board) const//check if king is attacked	(check)
+bool Piece::isKingAttacked( Board& board) const//check if king is attacked	(check)
 {
 	int i = 0;
 	int j = 0;
 	int z = 0;
 	std::vector<std::string> possibleMovesForOponent;
+	Piece* king = nullptr;
 	for (i = 0; i < BOARD_SIZE; i++)
 	{
 		for (j = 0; j < BOARD_SIZE; j++)
 		{
 			Piece* piece = board.getPiece(std::string(1, (char)(i + 'a')) + std::string(1, (char)(j + '1')));
-			if (piece != nullptr && piece->getSymbol() != 'K' && piece->_isWhite != this->_isWhite)
+			if(piece != nullptr && piece->_symbol == 'K' && piece->_isWhite == this->_isWhite)
 			{
-				possibleMovesForOponent = piece->getPossibleMoves();
+				king = piece;
+				break;
+			}
+		}
+	}
+	if(!king)
+	{
+		return false;//king not found
+	}
+	for (i = 0; i < BOARD_SIZE; i++)
+	{
+		for (j = 0; j < BOARD_SIZE; j++)
+		{	
+			Piece* piece = board.getPiece(std::string(1, (char)(i + 'a')) + std::string(1, (char)(j + '1')));
+			if (piece != nullptr &&  piece->_isWhite != this->_isWhite)
+			{
+				possibleMovesForOponent = piece->getAttackMoves(board);
 				for (z = 0; z < possibleMovesForOponent.size(); z++)//chaeck if king is attacked
 				{
-					if (possibleMovesForOponent[z][0] - 'a' == _coords[0] && possibleMovesForOponent[z][1] - '1' == _coords[1])
+					if (possibleMovesForOponent[z] == king->getCurrentPosition() )
 					{
 						return true;
 					}
@@ -114,4 +142,8 @@ void Piece::setCurrentPosition(const std::string& newPosition,  Board& board) //
 char Piece::getSymbol()  const//get symbol
 {
 	return _symbol;
+}
+bool Piece::getIsWhite() const//get is white
+{
+	return _isWhite;
 }
