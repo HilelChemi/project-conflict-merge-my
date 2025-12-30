@@ -6,8 +6,7 @@
 
 class Pawn : public Piece
 {
-private:
-	bool isFirstTurn;
+
 public:
 	Pawn(bool isWhite, int coords[], char symbol);
 	~Pawn();
@@ -15,5 +14,4 @@ public:
 	std::vector<std::string> getAttackMoves(Board& board) override;
 	void addMoves(std::vector<std::string>& possibleMoves, const std::string& newPos, Board& board) override;
 	void addMovesAttack(std::vector<std::string>& possibleMoves, const std::string& newPos, Board& board);
-	void changeFirstTurn() override;
 };

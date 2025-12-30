@@ -116,7 +116,7 @@ void Board::changeBoard(const std::string& fromPosition, const std::string& toPo
 	int fromY = fromPosition[1] - '1';
 	int toX = toPosition[0] - 'a';
 	int toY = toPosition[1] - '1';
-	board[fromX][fromY]->changeFirstTurn();
+	board[fromX][fromY];
 	board[toX][toY] = board[fromX][fromY];
 	board[fromX][fromY] = nullptr;
 	board[toX][toY]->setCurrentPosition(toPosition);
@@ -140,4 +140,23 @@ void Board::printBoard() const
 		std::cout << std::endl;
 	}
 	std::cout << "  a b c d e f g h" << std::endl;
+}
+std::string Board::getBoardString() const
+{
+	std::string boardString = "";
+	for (int j = BOARD_SIZE - 1; j >= 0; j--)
+	{
+		for (int i = 0; i < BOARD_SIZE; i++)
+		{
+			if (board[i][j] != nullptr)
+			{
+				boardString += board[i][j]->getSymbol();
+			}
+			else
+			{
+				boardString += VISUAL_BECKROUND;
+			}
+		}
+	}
+	return boardString;
 }

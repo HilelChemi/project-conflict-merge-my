@@ -5,14 +5,8 @@
 
 class Player
 {
-	private:
-		bool isWhite;
-		std::string src;
-		std::string dst;
 
 	public:
-		Player(bool isWhite, std::string src, std::string dst);
-		~Player();
-		void pickingMove(Board& board);//inputing leagle move from player and changing src and dst
-		void movingPiece(Board& board) ;//moving piece on the board
+		static int pickingMove(Board& board, std::string move,  bool isWite);//inputing leagle move from player and changing src and dst
+		static void movingPiece(Board& board, std::string move, int code); //moving piece on the board
 };

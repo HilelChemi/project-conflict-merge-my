@@ -75,11 +75,6 @@ bool Piece::canMoveTo(const std::string& newPosition,  Board& board) //check if 
 	board.setPiece(savePiece, newPosition);
 	return false;
 }
-void Piece::changeFirstTurn()//only for pawns
-{
-	//only for pawns
-}
-
 bool Piece::isKingAttacked( Board& board) const//check if king is attacked	(check)
 {
 	int i = 0;

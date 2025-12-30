@@ -9,7 +9,7 @@
 #include "Queen.h"
 #include "Pawn.h"
 #define BOARD_SIZE 8
-#define VISUAL_BECKROUND '.'
+#define VISUAL_BECKROUND '#'
 #define WHITE_KING_SYMBOL 'K'
 #define BLACK_KING_SYMBOL 'k'
 #define WHITE_ROOK_SYMBOL 'R'
@@ -35,4 +35,5 @@ class Board
 		void setPiece(Piece* piece, const std::string& position);
 		void changeBoard(const std::string& fromPosition, const std::string& toPosition);
 		void printBoard() const;
+		std::string getBoardString() const;
 };
