@@ -45,6 +45,16 @@ void Board::resetBoard()
 	pos[X] = 4;
 	pos[Y] = 7;
 	setPiece(new King(false, pos, BLACK_KING_SYMBOL), "e8");
+	pos[X] = 1;
+	pos[Y] = 0;
+	setPiece(new Knight(true, pos, WHITE_KNIGHT_SYMBOL), "b1");
+	pos[X] = 6;
+	setPiece(new Knight(true, pos, WHITE_KNIGHT_SYMBOL), "g1");
+	pos[X] = 1;
+	pos[Y] = 7;
+	setPiece(new Knight(false, pos, BLACK_KNIGHT_SYMBOL), "b8");
+	pos[X] = 6;
+	setPiece(new Knight(false, pos, BLACK_KNIGHT_SYMBOL), "g8");
 
 }
 std::vector<Piece> Board::getBoard()

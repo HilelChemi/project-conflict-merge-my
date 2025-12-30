@@ -4,12 +4,15 @@
 #include "Piece.h"
 #include "Rook.h"
 #include "King.h"
+#include "Knight.h"
 #define BOARD_SIZE 8
 #define VISUAL_BECKROUND '.'
 #define WHITE_KING_SYMBOL 'K'
 #define BLACK_KING_SYMBOL 'k'
 #define WHITE_ROOK_SYMBOL 'R'
 #define BLACK_ROOK_SYMBOL 'r'
+#define WHITE_KNIGHT_SYMBOL 'N'
+#define BLACK_KNIGHT_SYMBOL 'n'
 class Board
 {
 	private:
