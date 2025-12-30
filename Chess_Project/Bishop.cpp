@@ -84,3 +84,4 @@ void Bishop::addMoves(std::vector<std::string>& possibleMoves, const std::string
 		}
 	}
 }
+

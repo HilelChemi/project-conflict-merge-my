@@ -7,6 +7,7 @@
 #include "Knight.h"
 #include "Bishop.h"
 #include "Queen.h"
+#include "Pawn.h"
 #define BOARD_SIZE 8
 #define VISUAL_BECKROUND '.'
 #define WHITE_KING_SYMBOL 'K'
@@ -19,6 +20,8 @@
 #define BLACK_BISHOP_SYMBOL 'b'
 #define WHITE_QUEEN_SYMBOL 'Q'
 #define BLACK_QUEEN_SYMBOL 'q'
+#define WHITE_PAWN_SYMBOL 'P'
+#define BLACK_PAWN_SYMBOL 'p'
 class Board
 {
 	private:

@@ -71,6 +71,16 @@ void Board::resetBoard()
 	pos[X] = 3;
 	pos[Y] = 7;
 	setPiece(new Queen(false, pos, BLACK_QUEEN_SYMBOL), "d8");
+	for (int i = 0; i < BOARD_SIZE; i++)
+	{
+		pos[X] = i;
+		pos[Y] = 1;
+		std::string position = std::string(1, 'a' + i) + '2';
+		setPiece(new Pawn(true, pos, WHITE_PAWN_SYMBOL), position);
+		pos[Y] = 6;
+		position = std::string(1, 'a' + i) + '7';
+		setPiece(new Pawn(false, pos, BLACK_PAWN_SYMBOL), position);
+	}
 
 }
 std::vector<Piece> Board::getBoard()
@@ -106,6 +116,7 @@ void Board::changeBoard(const std::string& fromPosition, const std::string& toPo
 	int fromY = fromPosition[1] - '1';
 	int toX = toPosition[0] - 'a';
 	int toY = toPosition[1] - '1';
+	board[fromX][fromY]->changeFirstTurn();
 	board[toX][toY] = board[fromX][fromY];
 	board[fromX][fromY] = nullptr;
 	board[toX][toY]->setCurrentPosition(toPosition);
