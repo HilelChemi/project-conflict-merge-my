@@ -5,7 +5,7 @@ in order to read and write information from and to the Backend
 */
 #ifdef _WIN32
 #endif // _WIN32
-
+#define _CRT_SECURE_NO_WARNINGS
 #include "Pipe.h"
 #include <iostream>
 #include <thread>
@@ -15,13 +15,14 @@ in order to read and write information from and to the Backend
 #include <chrono>
 #include "Board.h"
 #include "Player.h"
+#include <cstring>
 
 using std::cout;
 using std::endl;
 using std::string;
 
 
-void main()
+int main()
 {
 	srand(time_t(NULL));
 
@@ -45,7 +46,7 @@ void main()
 		else 
 		{
 			p.close();
-			return;
+			return 1;
 		}
 	}
 	
@@ -59,7 +60,7 @@ void main()
 	
 
 	msgToGraphics[0] = '\0';
-	strcpy_s(msgToGraphics,66, (board.getBoardString() + "0").	c_str()); // current board + '0' for no check
+	strcpy(msgToGraphics, (board.getBoardString() + "0").c_str()); // current board + '0' for no check
 	cout << "Initial board sent to graphics." << endl;
 	
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
@@ -76,7 +77,7 @@ void main()
 		// YOUR CODE
 		msgToGraphics[0] = '\0';
 		int moveResultCode = Player::pickingMove(board, msgFromGraphics, isWiteTurn);
-		strcpy_s(msgToGraphics, 2,(std::to_string(moveResultCode)).c_str()); // msgToGraphics should contain the result of the operation
+		strcpy(msgToGraphics, (std::to_string(moveResultCode)).c_str()); // msgToGraphics should contain the result of the operation
 		if (moveResultCode == 0 || moveResultCode == 1 || moveResultCode == 8)
 		{
 			isWiteTurn = !isWiteTurn;
@@ -91,4 +92,5 @@ void main()
 	}
 
 	p.close();
+	return 0;
 }
