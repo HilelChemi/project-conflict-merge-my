@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "Piece.h"
 #include "Board.h"	
-#include <stdio.h>
+
 
  int Player::pickingMove(Board& board, std::string move, bool isWite)//0=wite, 1=black
 {
