@@ -1,5 +1,6 @@
 #include "Piece.h"
 #include "Board.h"
+#include <iostream>
 
 Piece::Piece(bool isWhite, int coords[], char symbol) //builder
 {
@@ -85,6 +86,7 @@ bool Piece::isKingAttacked( Board& board) const//check if king is attacked	(chec
 	char kingSymbol ;
 	if (board.getPiece(getCurrentPosition()) == nullptr)
 	{
+		std::cout << "piece not on board" << std::endl;
 		return false;//piece not on board
 	}
 	if(_isWhite)

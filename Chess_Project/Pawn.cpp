@@ -28,11 +28,11 @@ std::vector<std::string> Pawn::getPossibleMoves(Board& board)
 	if (canMoveTo(newPos, board))
 	{
 		addMoves(possibleMoves, newPos, board);//one step forward
+	}
+	if (((getIsWhite() && current[Y] == '2') || (!getIsWhite() && current[Y] == '7')) && board.getPiece(newPos) == nullptr&&canMoveTo(newPos,board))//check if first turn and the square in front is empty and king wont be attacked
+	{
 		newPos[Y] += direction;
-		if ((getIsWhite() && current[Y] == '2')||(!getIsWhite()&&current[Y] == '7'))//check if first turn
-		{
-			addMoves(possibleMoves, newPos, board);//two steps forward
-		}
+		addMoves(possibleMoves, newPos, board);//two steps forward
 	}
 	newPos = current;
 	for (int i = 0; i < AttackMoves.size(); i++)

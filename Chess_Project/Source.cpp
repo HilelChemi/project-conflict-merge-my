@@ -76,22 +76,18 @@ void main()
 		// YOUR CODE
 		msgToGraphics[0] = '\0';
 		int moveResultCode = Player::pickingMove(board, msgFromGraphics, isWiteTurn);
-		std::cout << "Move result code: " << moveResultCode << std::endl;
 		strcpy_s(msgToGraphics, 2,(std::to_string(moveResultCode)).c_str()); // msgToGraphics should contain the result of the operation
-		std::cout << "Move result code: " << moveResultCode << std::endl;
 		if (moveResultCode == 0 || moveResultCode == 1 || moveResultCode == 8)
 		{
 			isWiteTurn = !isWiteTurn;
-			Player::movingPiece(board, msgFromGraphics, moveResultCode);
 		}
 
 
 		// return result to graphics		
 		p.sendMessageToGraphics(msgToGraphics);   
-
+		board.printBoard();
 		// get message from graphics
 		msgFromGraphics = p.getMessageFromGraphics();
-		board.printBoard();
 	}
 
 	p.close();
